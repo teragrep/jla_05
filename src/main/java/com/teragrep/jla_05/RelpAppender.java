@@ -217,11 +217,7 @@ public final class RelpAppender extends AppenderSkeleton {
             } catch (IllegalStateException | IOException | java.util.concurrent.TimeoutException e) {
                 System.out.println("RelpAppender.flush.commit> exception:");
                 e.printStackTrace();
-                try {
-                    this.relpConnection.tearDown();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
+                this.relpConnection.tearDown();
                 this.connected = false;
             }
             // Check if everything has been sent, retry and reconnect if not.

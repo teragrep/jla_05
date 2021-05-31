@@ -1,6 +1,11 @@
 # Log4j RELP Plugin
 [![Build Status](https://scan.coverity.com/projects/23199/badge.svg)](https://scan.coverity.com/projects/jla_05)
 
+## Please note
+[[CVE-2020-9488]](https://nvd.nist.gov/vuln/detail/CVE-2020-9488) Improper validation of certificate with host mismatch in Apache Log4j SMTP appender.
+
+[[CVE-2019-17571]](https://nvd.nist.gov/vuln/detail/CVE-2019-17571) Included in Log4j 1.2 is a SocketServer class that is vulnerable to deserialization of untrusted data which can be exploited to remotely execute arbitrary code when combined with a deserialization gadget when listening to untrusted network traffic for log data.
+
 ## Example log4j.properties
 
 ```

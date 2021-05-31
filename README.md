@@ -1,4 +1,6 @@
 # Log4j RELP Plugin
+[![Build Status](https://scan.coverity.com/projects/23199/badge.svg)](https://scan.coverity.com/projects/jla_05)
+
 ## Example log4j.properties
 
 ```

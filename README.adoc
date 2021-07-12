@@ -1,12 +1,16 @@
+:opening-bracket: &#91;
+:closing-bracket: &#93;
 # Log4j RELP Plugin
 [![Build Status](https://scan.coverity.com/projects/23199/badge.svg)](https://scan.coverity.com/projects/jla_05)
+
+Creates Log4j appender that uses RELP to ensure no events are lost.
 
 ## Please note
 Please note that regarding log4j version 1.2.17 following vulnerabilities exist and we recommend not to use these features:
 
-[[CVE-2020-9488]](https://nvd.nist.gov/vuln/detail/CVE-2020-9488) Improper validation of certificate with host mismatch in Apache Log4j SMTP appender.
+https://nvd.nist.gov/vuln/detail/CVE-2020-9488[{opening-bracket}CVE-2020-9488{closing-bracket}] Improper validation of certificate with host mismatch in Apache Log4j SMTP appender.
 
-[[CVE-2019-17571]](https://nvd.nist.gov/vuln/detail/CVE-2019-17571) Included in Log4j 1.2 is a SocketServer class that is vulnerable to deserialization of untrusted data which can be exploited to remotely execute arbitrary code when combined with a deserialization gadget when listening to untrusted network traffic for log data.
+https://nvd.nist.gov/vuln/detail/CVE-2019-17571[{opening-bracket}CVE-2019-17571{closing-bracket}] Included in Log4j 1.2 is a SocketServer class that is vulnerable to deserialization of untrusted data which can be exploited to remotely execute arbitrary code when combined with a deserialization gadget when listening to untrusted network traffic for log data.
 
 ## Example log4j.properties
 
@@ -31,6 +35,25 @@ log4j.appender.RELPAPPENDER.reconnectInterval=3000
 log4j.appender.RELPAPPENDER.useSD=true
 ```
 
+## Property explanations
+ * log4j.appender.RELPAPPENDER.relpAddress
+ ** Connection destination address
+ * log4j.appender.RELPAPPENDER.relpPort
+ ** Connection destination port
+ * log4j.appender.RELPAPPENDER.appName
+ ** Stream application identifier. Maximum length of 48 characters, limited by RFC5424
+ * log4j.appender.RELPAPPENDER.hostname
+ ** Stream host identifier. Maximum length of 255 characters, limited by RFC5424
+ * log4j.appender.RELPAPPENDER.connectionTimeout
+ ** Time to wait before timing out connection
+ * log4j.appender.RELPAPPENDER.writeTimeout
+ ** Time to wait for destination to accept data
+ * log4j.appender.RELPAPPENDER.readTimeout
+ ** Time to wait for destination to acknowledge sent data (low values cause duplicates)
+ * log4j.appender.RELPAPPENDER.reconnectInterval
+ ** Time to wait between re-connection attempts
+ * log4j.appender.RELPAPPENDER.useSD
+ ** Enables structured data containing uuid and source information
 
 ## Usage
 

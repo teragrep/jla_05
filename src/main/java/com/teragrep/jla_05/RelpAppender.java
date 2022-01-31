@@ -27,6 +27,8 @@ import com.teragrep.rlp_01.RelpBatch;
 import com.teragrep.rlp_01.RelpConnection;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.UUID;
@@ -36,6 +38,7 @@ public final class RelpAppender extends AppenderSkeleton {
     String appName;
     int connectionTimeout;
     String hostname;
+    String realhostname;
     int readTimeout;
     String relpAddress;
     String useSD;
@@ -60,6 +63,21 @@ public final class RelpAppender extends AppenderSkeleton {
 
     public void setHostname(String hostname) {
         this.hostname = hostname;
+    }
+
+    public String getRealHostname() {
+        if(this.realhostname == null) {
+            initRealHostname();
+        }
+        return this.realhostname;
+    }
+
+    public void initRealHostname() {
+        try {
+            this.realhostname = InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            this.realhostname = "localhost";
+        };
     }
 
     public String getRelpAddress() {
@@ -201,7 +219,7 @@ public final class RelpAppender extends AppenderSkeleton {
                     .addSDParam("source", "source")
                     .addSDParam("unixtime", Long.toString(System.currentTimeMillis()));
             SDElement origin_48577 = new SDElement("origin@48577")
-                    .addSDParam("hostname", this.getHostname());
+                    .addSDParam("hostname", this.getRealHostname());
             syslog = syslog
                     .withSDElement(event_id_48577)
                     .withSDElement(origin_48577);

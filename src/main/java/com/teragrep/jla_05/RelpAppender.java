@@ -35,6 +35,9 @@ import java.util.UUID;
 import java.util.concurrent.TimeoutException;
 
 public final class RelpAppender extends AppenderSkeleton {
+    {
+        initRealHostname();
+    }
     String appName;
     int connectionTimeout;
     String hostname;
@@ -47,6 +50,7 @@ public final class RelpAppender extends AppenderSkeleton {
     int writeTimeout;
     int reconnectInterval;
     boolean connected = false;
+
     private RelpConnection relpConnection = new RelpConnection();
 
     public int getReconnectInterval() {
@@ -66,9 +70,6 @@ public final class RelpAppender extends AppenderSkeleton {
     }
 
     public String getRealHostname() {
-        if(this.realhostname == null) {
-            initRealHostname();
-        }
         return this.realhostname;
     }
 

@@ -38,7 +38,7 @@ public class FunctionalityTest {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date start = new Date();
         System.out.println("Start: " + sdf.format(start));
-        int event_count = 1000000;
+        int event_count = 3;
         Assertions.assertAll(() -> {
             for(int i=1; i<=event_count; i++) {
                 logger.info("Info Message #" + i);
@@ -51,7 +51,7 @@ public class FunctionalityTest {
         Date end = new Date();
         System.out.println("End: " + sdf.format(end));
         long duration = (end.getTime() - start.getTime())/1000;
-        long eps = event_count/duration;
+        long eps = event_count/(duration==0?1:duration);
         System.out.println("Elapsed: " + duration + "s (" + eps + " eps)");
     }
 }

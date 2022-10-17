@@ -5,35 +5,14 @@
 
 Creates Log4j appender that uses RELP to ensure no events are lost.
 
+See link:https://github.com/teragrep/jla_05/blob/master/src/main/resources/log4j.example.properties[log4j.example.properties] for example config
+
 ## Please note
 Please note that regarding log4j version 1.2.17 following vulnerabilities exist and we recommend not to use these features:
 
 https://nvd.nist.gov/vuln/detail/CVE-2020-9488[{opening-bracket}CVE-2020-9488{closing-bracket}] Improper validation of certificate with host mismatch in Apache Log4j SMTP appender.
 
 https://nvd.nist.gov/vuln/detail/CVE-2019-17571[{opening-bracket}CVE-2019-17571{closing-bracket}] Included in Log4j 1.2 is a SocketServer class that is vulnerable to deserialization of untrusted data which can be exploited to remotely execute arbitrary code when combined with a deserialization gadget when listening to untrusted network traffic for log data.
-
-## Example log4j.properties
-
-```
-log4j.rootLogger=DEBUG, CONSOLE, RELPAPPENDER
-log4j.appender.CONSOLE=org.apache.log4j.ConsoleAppender
-log4j.appender.CONSOLE.Threshold=INFO
-log4j.appender.CONSOLE.layout=org.apache.log4j.PatternLayout
-log4j.appender.CONSOLE.layout.ConversionPattern=[%p] [%F#%L] [%C] %m%n
-log4j.appender.RELPAPPENDER=com.teragrep.jla_05.RelpAppender
-log4j.appender.RELPAPPENDER.Threshold=INFO
-log4j.appender.RELPAPPENDER.layout=org.apache.log4j.PatternLayout
-log4j.appender.RELPAPPENDER.layout.ConversionPattern=[%p] [%F#%L] [%C] %m%n
-log4j.appender.RELPAPPENDER.relpAddress=localhost
-log4j.appender.RELPAPPENDER.relpPort=1666
-log4j.appender.RELPAPPENDER.appName=jla_05
-log4j.appender.RELPAPPENDER.hostname=localhost
-log4j.appender.RELPAPPENDER.connectionTimeout=5000
-log4j.appender.RELPAPPENDER.writeTimeout=2000
-log4j.appender.RELPAPPENDER.readTimeout=15000
-log4j.appender.RELPAPPENDER.reconnectInterval=3000
-log4j.appender.RELPAPPENDER.useSD=true
-```
 
 ## Property explanations
  * log4j.appender.RELPAPPENDER.relpAddress

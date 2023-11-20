@@ -65,13 +65,11 @@ LogManager.shutdown();
 
 ## Configuring pre-built log4j application
 
-First download wanted versions of jla_05, rlp_01 and syslog-java-client from the following urls:
+First download wanted versions of jla_05 and rlp_01 from the following urls:
 
 https://search.maven.org/artifact/com.teragrep/jla_05[jla_05]
 
 https://search.maven.org/artifact/com.teragrep/rlp_01[rlp_01]
-
-https://search.maven.org/artifact/com.cloudbees/syslog-java-client[syslog-java-client]
 
 Then run java while pointing classpath to the directory where you downloaded the jars to like:
 

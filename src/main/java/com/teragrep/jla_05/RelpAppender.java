@@ -154,8 +154,7 @@ public final class RelpAppender extends AppenderSkeleton {
         try {
             this.relpConnection.disconnect();
         } catch (IllegalStateException | IOException | java.util.concurrent.TimeoutException e) {
-            System.out.println("RelpAppender.disconnect> exception:");
-            e.printStackTrace();
+            System.out.printf("RelpAppender.disconnect exception: <%s>%n", e.getMessage());
         }
         this.relpConnection.tearDown();
         this.connected = false;
@@ -169,14 +168,13 @@ public final class RelpAppender extends AppenderSkeleton {
                 this.relpConnection.setWriteTimeout(this.getWriteTimeout());
                 this.connected = this.relpConnection.connect(this.getRelpAddress(), this.getRelpPort());
             } catch (Exception e) {
-                System.out.println("RelpAppender.connect> exception:");
-                e.printStackTrace();
+                System.out.printf("RelpAppender.connect exception: <%s>%n", e.getMessage());
             }
             if(!this.connected) {
                 try {
                     Thread.sleep(this.getReconnectInterval());
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    System.out.printf("RelpAppender.connect.sleep exception: <%s>%n", e.getMessage());
                 }
             }
         }
@@ -190,7 +188,7 @@ public final class RelpAppender extends AppenderSkeleton {
         try {
             disconnect();
         } catch (IOException | TimeoutException e) {
-            e.printStackTrace();
+            System.out.printf("RelpAppender.close exception: <%s>%n", e.getMessage());
         }
     }
 
@@ -234,8 +232,7 @@ public final class RelpAppender extends AppenderSkeleton {
             try {
                 this.relpConnection.commit(batch);
             } catch (IllegalStateException | IOException | java.util.concurrent.TimeoutException e) {
-                System.out.println("RelpAppender.flush.commit> exception:");
-                e.printStackTrace();
+                System.out.printf("RelpAppender.flush.commit exception: <%s>%n", e.getMessage());
                 this.relpConnection.tearDown();
                 this.connected = false;
             }
@@ -245,7 +242,7 @@ public final class RelpAppender extends AppenderSkeleton {
                 try {
                     reconnect();
                 } catch (IOException | TimeoutException e) {
-                    e.printStackTrace();
+                    System.out.printf("RelpAppender.flush.reconnect exception: <%s>%n", e.getMessage());
                 }
             } else {
                 allSent = true;

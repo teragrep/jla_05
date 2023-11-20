@@ -153,6 +153,7 @@ public final class RelpAppender extends AppenderSkeleton {
         }
         try {
             this.relpConnection.disconnect();
+            System.out.printf("Disconnected from <[%s]>:<[%s]>%n", relpAddress, relpPort);
         } catch (IllegalStateException | IOException | java.util.concurrent.TimeoutException e) {
             System.out.printf("RelpAppender.disconnect exception: <%s>%n", e.getMessage());
         }
@@ -167,6 +168,7 @@ public final class RelpAppender extends AppenderSkeleton {
                 this.relpConnection.setReadTimeout(this.getReadTimeout());
                 this.relpConnection.setWriteTimeout(this.getWriteTimeout());
                 this.connected = this.relpConnection.connect(this.getRelpAddress(), this.getRelpPort());
+                System.out.printf("Connected to <[%s]>:<[%s]>%n", relpAddress, relpPort);
             } catch (Exception e) {
                 System.out.printf("RelpAppender.connect exception: <%s>%n", e.getMessage());
             }
@@ -241,6 +243,7 @@ public final class RelpAppender extends AppenderSkeleton {
                 batch.retryAllFailed();
                 try {
                     reconnect();
+                    System.out.printf("Reconnected to <[%s]>:<[%s]>%n", relpAddress, relpPort);
                 } catch (IOException | TimeoutException e) {
                     System.out.printf("RelpAppender.flush.reconnect exception: <%s>%n", e.getMessage());
                 }
